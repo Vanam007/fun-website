@@ -4,23 +4,17 @@
     <title>Fun Website</title>
     <style>
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            margin: 0;
             height: 100vh;
             font-family: Arial, sans-serif;
-            flex-direction: column;
             background-color: #f2f2f2;
+            overflow: hidden;
+            position: relative;
         }
 
         h1 {
-            margin-bottom: 20px;
-        }
-
-        .buttons {
-            position: relative;
-            width: 300px;
-            height: 150px;
+            text-align: center;
+            margin-top: 100px;
         }
 
         button {
@@ -33,23 +27,23 @@
         #yesBtn {
             background-color: green;
             color: white;
-            left: 50px;
-            top: 50px;
+            left: 45%;
+            top: 50%;
         }
 
         #noBtn {
             background-color: red;
             color: white;
-            left: 150px;
-            top: 50px;
+            left: 55%;
+            top: 50%;
         }
 
         #message {
             display: none;
             font-size: 32px;
             font-weight: bold;
-            color: green;
-            margin-top: 20px;
+            text-align: center;
+            margin-top: 40px;
         }
     </style>
 </head>
@@ -57,22 +51,20 @@
 
     <h1>Do you like this website?</h1>
 
-    <div class="buttons">
-        <button id="yesBtn">Yes</button>
-        <button id="noBtn">No</button>
-    </div>
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
 
-    <div id="message">CONGRATULATIONS</div>
+    <div id="message"></div>
 
     <script>
         const noBtn = document.getElementById("noBtn");
         const yesBtn = document.getElementById("yesBtn");
         const message = document.getElementById("message");
 
+        // Move NO button anywhere on full page
         noBtn.addEventListener("mouseover", function() {
-            const container = document.querySelector(".buttons");
-            const maxX = container.clientWidth - noBtn.offsetWidth;
-            const maxY = container.clientHeight - noBtn.offsetHeight;
+            const maxX = window.innerWidth - noBtn.offsetWidth;
+            const maxY = window.innerHeight - noBtn.offsetHeight;
 
             const randomX = Math.floor(Math.random() * maxX);
             const randomY = Math.floor(Math.random() * maxY);
@@ -81,8 +73,15 @@
             noBtn.style.top = randomY + "px";
         });
 
+        // If YES clicked
         yesBtn.addEventListener("click", function() {
-            document.querySelector(".buttons").style.display = "none";
+            message.innerHTML = "CONGRATULATIONS 🎉";
+            message.style.display = "block";
+        });
+
+        // If NO clicked
+        noBtn.addEventListener("click", function() {
+            message.innerHTML = "no is not your choise 😎";
             message.style.display = "block";
         });
     </script>
